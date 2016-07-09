@@ -12,7 +12,7 @@ fs
     });
 
 module.exports = {
-  watch: env.NODE_ENV === 'dev',
+  watch: process.env.NODE_ENV === 'dev',
   entry: conf.entry,
   output: conf.output,
   target: 'node',

@@ -1,4 +1,4 @@
-require('shelljs/global');
+const shell = require('shelljs');
 const ora = require('ora');
 const webpack = require('webpack');
 const config = require('./webpack.prod.conf');
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'dev') {
 
 spinner.start();
 
-rm('-rf', config.output.path);
+shell.rm('-rf', config.output.path);
 
 const [colors, modules, children, chunks, chunkModules] = [true, false, false, false, false];
 

@@ -111,7 +111,7 @@ import { Life, Mana } from './hero.detail';
 
 @naming('HeroFactory')
 @inject(Life, Mana)
-@singleton
+@singleton()
 class Hero {
   constructor(life, mana) {
     this.life = life;

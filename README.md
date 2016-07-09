@@ -1,5 +1,7 @@
 # Morgana
 
+[![Code Climate](https://codeclimate.com/repos/5781715fe0063c008500555f/badges/c99739c75f39565b418e/gpa.svg)](https://codeclimate.com/repos/5781715fe0063c008500555f/feed)
+
 Dependency Injection for Node.js with ES7 decorators.
 
 Morgana is a DIC (Dependency Injection Container) with friendly usage.

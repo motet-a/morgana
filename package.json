@@ -2,14 +2,29 @@
   "name": "morgana",
   "version": "1.0.0",
   "description": "Dependency Injection for Node.js with ES7 decorators",
+  "author": "Meillet Robin",
+  "license": "MIT",
   "scripts": {
     "build": "NODE_ENV=production node ./env/build.js",
     "dev": "NODE_ENV=dev node ./env/build.js",
     "test": "mocha ./tests/**/*.js --colors --compilers js:babel-core/register",
     "test:watch": "mocha ./tests/**/*.js --watch --colors --compilers js:babel-core/register"
   },
-  "author": "Meillet Robin",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kMeillet/morgana.git"
+  },
+  "keywords": [
+    "dependency",
+    "injection",
+    "di",
+    "dic",
+    "morgana"
+  ],
+  "bugs": {
+    "url": "https://github.com/kMeillet/morgana/issues"
+  },
+  "homepage": "https://github.com/kMeillet/morgana#readme",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-core": "^6.7.4",

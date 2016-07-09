@@ -2,7 +2,7 @@ const config = require('./webpack.base.conf');
 const webpack = require('webpack');
 const plugins = [];
 
-if (env.NODE_ENV !== 'dev') {
+if (process.env.NODE_ENV !== 'dev') {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     comments: false,
     compress: { warnings: false },

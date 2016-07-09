@@ -1,10 +1,17 @@
 require('shelljs/global');
-env.NODE_ENV = 'production';
-
 const ora = require('ora');
 const webpack = require('webpack');
 const config = require('./webpack.prod.conf');
-const spinner = ora(`Building ...`);
+let spinner;
+let end;
+
+if (process.env.NODE_ENV !== 'dev') {
+  spinner = ora('Building ...');
+  end = `\nBuild OK !`;
+} else {
+  spinner = ora('Start dev. server ...');
+  end = `\nServer started !`;
+}
 
 spinner.start();
 
@@ -27,5 +34,5 @@ webpack(config, (err, stats) => {
     chunkModules,
   })}\n`);
 
-  console.log(`\nBuild OK`);
+  console.log(end);
 });

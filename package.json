@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Dependency Injection for Node.js with ES7 decorators",
   "scripts": {
-    "build": "node ./env/build.js",
-    "dev": "node ./env/dev-server.js",
+    "build": "NODE_ENV=production node ./env/build.js",
+    "dev": "NODE_ENV=dev node ./env/build.js",
     "test": "mocha ./tests/**/*.js --colors --compilers js:babel-core/register",
     "test:watch": "mocha ./tests/**/*.js --watch --colors --compilers js:babel-core/register"
   },

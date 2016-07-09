@@ -8,7 +8,7 @@ fs
     .readdirSync('node_modules')
     .filter(x => ['.bin'].indexOf(x) === -1)
     .forEach(mod => {
-      dependencies[mod] = 'commonjs ' + mod;
+      dependencies[mod] = `commonjs${mod}`;
     });
 
 module.exports = {

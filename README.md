@@ -8,32 +8,11 @@ Morgana is a DIC (Dependency Injection Container) with friendly usage.
 
 We use ES7 decorators to purpose a minimal set of functionality.
 
-Actually, Morgana work only on Node.js >= 6 !
+Actually, Morgana work only in a ES6/ES7 environment.
 
 # How to use
 
-Remember : to use decorator, you need to use Babel with this .babelrc configuration :
-
-```json
-{
-  "passPerPreset": true,
-  "presets": [
-    "es2015",
-    "stage-0",
-    "stage-1",
-    "stage-2"
-  ],
-  "plugins": [
-    "transform-runtime",
-    "transform-decorators-legacy"
-  ],
-  "comments": false
-}
-```
-
-The npm package "babel-plugin-transform-decorators-legacy" is needed.
-
-You can't use decorator without a transpiler.
+We recommend to use Babel (in stage-0) with "babel-plugin-transform-decorators-legacy" and "babel-plugin-transform-runtime" plugins.
 
 Now, install morgana :
 
@@ -103,7 +82,7 @@ import { $ } from 'morgana/injectable';
 const me = $('HeroFactory'); // got a new Hero instance
 ```
 
-If you don't want a new instance every time you claim your class (singleton pattern), you can use the singleton decorator :
+If you don't want a new instance, you can use the singleton decorator :
 
 ```js
 /* hero.js */

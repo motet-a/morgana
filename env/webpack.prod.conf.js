@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'dev') {
   plugins.push(new webpack.optimize.UglifyJsPlugin({
     comments: false,
     compress: { warnings: false },
-    sourceMap: true,
+    sourceMap: false,
     mangle: true,
   }));
 }

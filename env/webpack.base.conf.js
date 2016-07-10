@@ -25,7 +25,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'eslint',
-        exclude: /(node_modules|libs|env|dist|daemon)/,
+        exclude: /(node_modules|libs|env|dist)/,
       },
     ],
     loaders: [
@@ -33,7 +33,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         include: root,
-        exclude: /(node_modules|libs|env|dist|daemon|tests)/,
+        exclude: /(node_modules|libs|env|dist|tests)/,
       },
     ],
   },

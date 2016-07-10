@@ -57,7 +57,7 @@ require('babel-register');
 // You're in ES6/ES7 env
 ```
 
-To run script :
+Run your app :
 
 ```sh
 babel-node index.js
@@ -92,7 +92,7 @@ class Hero {
 }
 ````
 
-It's better yo write 1 class per file, so move Attribut in other file.
+It's better to write 1 class per file, so move Attribut in other file.
 
 To access to a new Hero, we can use the $ function and pass a reference to the Hero class :
 

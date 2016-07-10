@@ -14,7 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/kMeillet/morgana.git"
   },
-  "index": "./dist/index.js",
+  "main": "dist/index.js",
   "keywords": [
     "dependency",
     "injection",

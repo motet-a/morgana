@@ -1,6 +1,6 @@
 {
   "name": "morgana",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Dependency Injection for Node.js with ES7 decorators",
   "author": "Meillet Robin",
   "license": "MIT",

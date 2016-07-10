@@ -8,13 +8,64 @@ Morgana is a DIC (Dependency Injection Container) with friendly usage.
 
 We use ES7 decorators to purpose a minimal set of functionality.
 
-Actually, Morgana work only in a ES6/ES7 environment.
+Actually, Morgana work only in a ES6 + ES7 environment.
+
+# How to setup Node for ES6/ES7
+
+You need to be in a ES6 + ES7 environment.
+
+Create a directory and make a file ".babelrc", use this configuration :
+
+```json
+{
+  "passPerPreset": true,
+  "presets": [
+    "es2015",
+    "stage-0",
+    "stage-1",
+    "stage-2"
+  ],
+  "plugins": [
+    "transform-runtime",
+    "transform-decorators-legacy"
+  ],
+  "comments": false
+}
+```
+
+You need to install Babel to transpile the next JavaScript into classic code.
+
+```sh
+npm init
+npm i babel babel-core babel-loader babel-plugin-transform-decorators-legacy babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-register --save-dev
+```
+
+To launch transpilation, you need a tool : WebPack or Gulp can do it.
+
+For some test, install the Babel command line interface globally :
+
+```sh
+npm i babel-cli -g
+```
+
+Now, you can make a file "index.js" and write ES6/ES7 :
+
+```js
+/* index.js */
+require('babel-register');
+
+// You're in ES6/ES7 env
+```
+
+To run script :
+
+```sh
+babel-node index.js
+```
 
 # How to use
 
-We recommend to use Babel (in stage-0) with "babel-plugin-transform-decorators-legacy" and "babel-plugin-transform-runtime" plugins.
-
-Now, install morgana :
+Install morgana package :
 
 ```sh
 npm i morgana --save-dev
@@ -23,94 +74,97 @@ npm i morgana --save-dev
 We can now inject dependency with the inject decorator :
 
 ```js
-/* hero.js */
-import { inject } from 'morgana/injectable';
+/* index.js */
+import { inject } from 'morgana';
 
-import { Life, Mana } from './hero.detail';
+class Attribut {
+  constructor() {
+    this.hp = 100;
+    this.mana = 100;
+  }
+}
 
-@inject(Life, Mana)
+@inject(Attribut)
 class Hero {
-  constructor(life, mana) {
-    this.life = life;
-    this.mana = mana;
-
-    this.life.set(100);
-    this.mana.set(100);
+  constructor(attribut) {
+    this.attribut = attribut;
   }
 }
 ````
+
+It's better yo write 1 class per file, so move Attribut in other file.
 
 To access to a new Hero, we can use the $ function and pass a reference to the Hero class :
 
 ```js
-/* app.js */
-import { $ } from 'morgana/injectable';
-import { Hero } from './hero';
+/* index.js */
+import { inject, $ } from 'morgana';
+import { Attribut } from './attribut';
 
-const me = $(Hero); // got a new Hero instance
-```
-
-Passing reference and import can be paintfull in large app ...
-
-You can use the naming decorator to alias your class, use it in first :
-
-```js
-/* hero.js */
-import { inject, naming } from 'morgana/injectable';
-
-import { Life, Mana } from './hero.detail';
-
-@naming('HeroFactory')
-@inject(Life, Mana)
+@inject(Attribut)
 class Hero {
-  constructor(life, mana) {
-    this.life = life;
-    this.mana = mana;
-
-    this.life.set(100);
-    this.mana.set(100);
+  constructor(attribut) {
+    this.attribut = attribut;
   }
 }
+
+const me = $(Hero); // new instance
+```
+
+Passing reference and import can be paintfull in large app, because you need to import the class in every file ...
+
+You can use the naming decorator to alias your class, use it at first decorator :
+
+```js
+/* index.js */
+import { inject, naming, $ } from 'morgana';
+import { Attribut } from './attribut';
+
+@naming('HeroFactory')
+@inject(Attribut)
+class Hero {
+  constructor(attribut) {
+    this.attribut = attribut;
+  }
+}
+
+const me = $(Hero); // new instance
 ````
 
-If we don't use parameter in naming decorator, the class name is used.
+If we don't use parameter on naming decorator, the class name is used.
+
+Now, we can use our alias rather than class reference.
 
 ```js
-/* app.js */
-import { $ } from 'morgana/injectable';
+/* other-file.js */
+import { $ } from 'morgana';
 
-const me = $('HeroFactory'); // got a new Hero instance
+const me = $('HeroFactory'); // new instance
 ```
 
-If you don't want a new instance, you can use the singleton decorator :
+If you don't want a new instance, singleton decorator is her :
 
 ```js
-/* hero.js */
-import { inject, naming, singleton } from 'morgana/injectable';
-
-import { Life, Mana } from './hero.detail';
+/* index.js */
+import { inject, naming, singleton, $ } from 'morgana';
+import { Attribut } from './attribut';
 
 @naming('HeroFactory')
-@inject(Life, Mana)
+@inject(Attribut)
 @singleton()
 class Hero {
-  constructor(life, mana) {
-    this.life = life;
-    this.mana = mana;
-
-    this.life.set(100);
-    this.mana.set(100);
+ constructor(attribut) {
+    this.attribut = attribut;
   }
 }
+
+const me = $('HeroFactory'); // new instance
+const yo = $('HeroFactory'); // same instance
 ````
 
 Now, every time we need a Hero, we got the same instance.
 
-If you need all functionnality, you can use the barrel facade :
-
-```js
-import { container, inject, naming, singleton, $ } from 'morgana';
-```
+Every time you use inject, you can use class in every part of your app.
 
 # Run test
 

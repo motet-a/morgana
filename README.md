@@ -1,6 +1,6 @@
 # Morgana
 
-[![Code Climate](https://codeclimate.com/repos/5781715fe0063c008500555f/badges/c99739c75f39565b418e/gpa.svg)](https://codeclimate.com/repos/5781715fe0063c008500555f/feed)
+[![Code Climate](https://codeclimate.com/repos/578549bdee82fe0745002cc2/badges/9e13378054ac03ac965d/gpa.svg)](https://codeclimate.com/repos/578549bdee82fe0745002cc2/feed)
 
 Dependency Injection for Node.js with ES7 decorators.
 

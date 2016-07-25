@@ -8,13 +8,13 @@ Morgana is a DIC (Dependency Injection Container) with friendly usage.
 
 We use ES7 decorators to purpose a minimal set of functionality.
 
-Actually, Morgana work only in a ES6 + ES7 environment.
+Actually, Morgana works only in a ES6 + ES7 environment.
 
-# How to setup Node for ES6/ES7
+# How to setup a Node.js project for ES6/ES7
 
 You need to be in a ES6 + ES7 environment.
 
-Create a directory and make a file ".babelrc", use this configuration :
+Create a directory and make a file ".babelrc", use this configuration:
 
 ```json
 {
@@ -40,15 +40,15 @@ npm init
 npm i babel babel-core babel-loader babel-plugin-transform-decorators-legacy babel-plugin-transform-runtime babel-preset-es2015 babel-preset-stage-0 babel-preset-stage-1 babel-preset-stage-2 babel-register --save-dev
 ```
 
-To launch transpilation, you need a tool : WebPack or Gulp can do it.
+To launch transpilation, you need a tool: WebPack or Gulp can do it.
 
-For some test, install the Babel command line interface globally :
+For some tests, install the Babel command line interface globally:
 
 ```sh
 npm i babel-cli -g
 ```
 
-Now, you can make a file "index.js" and write ES6/ES7 :
+Now, you can make an `index.js` file and write ES6/ES7:
 
 ```js
 /* index.js */
@@ -57,7 +57,7 @@ require('babel-register');
 // You're in ES6/ES7 env
 ```
 
-Run your app :
+Run your app:
 
 ```sh
 babel-node index.js
@@ -65,71 +65,74 @@ babel-node index.js
 
 # How to use
 
-Install morgana package :
+Install morgana package:
 
 ```sh
 npm i morgana --save-dev
 ```
 
-We can now inject dependency with the inject decorator :
+We can now inject dependencies with the inject decorator:
 
 ```js
 /* index.js */
 import { inject } from 'morgana';
 
-class Attribut {
+class Attribute {
   constructor() {
     this.hp = 100;
     this.mana = 100;
   }
 }
 
-@inject(Attribut)
+@inject(Attribute)
 class Hero {
-  constructor(attribut) {
-    this.attribut = attribut;
+  constructor(attribute) {
+    this.attribute = attribute;
   }
 }
-````
+```
 
-It's better to write 1 class per file, so move Attribut in other file.
+It's better to write one class per file, so move Attribute in other file.
 
-To access to a new Hero, we can use the $ function and pass a reference to the Hero class :
+To access to a new Hero, we can use the `$` function and pass a
+reference to the Hero class:
 
 ```js
 /* index.js */
 import { inject, $ } from 'morgana';
-import { Attribut } from './attribut';
+import { Attribute } from './attribute';
 
-@inject(Attribut)
+@inject(Attribute)
 class Hero {
-  constructor(attribut) {
-    this.attribut = attribut;
+  constructor(attribute) {
+    this.attribute = attribute;
   }
 }
 
 const me = $(Hero); // new instance
 ```
 
-Passing reference and import can be paintfull in large app, because you need to import the class in every file ...
+Passing reference and import can be painful in large apps, because you
+need to import the class in every file…
 
-You can use the naming decorator to alias your class, use it at first decorator :
+You can use the naming decorator to alias your classes, use it at first
+decorator:
 
 ```js
 /* index.js */
 import { inject, naming, $ } from 'morgana';
-import { Attribut } from './attribut';
+import { Attribute } from './attribute';
 
 @naming('HeroFactory')
-@inject(Attribut)
+@inject(Attribute)
 class Hero {
-  constructor(attribut) {
-    this.attribut = attribut;
+  constructor(attribute) {
+    this.attribute = attribute;
   }
 }
 
 const me = $(Hero); // new instance
-````
+```
 
 If we don't use parameter on naming decorator, the class name is used.
 
@@ -142,29 +145,30 @@ import { $ } from 'morgana';
 const me = $('HeroFactory'); // new instance
 ```
 
-If you don't want a new instance, singleton decorator is her :
+If you don't want a new instance, singleton decorator is here:
 
 ```js
 /* index.js */
 import { inject, naming, singleton, $ } from 'morgana';
-import { Attribut } from './attribut';
+import { Attribute } from './attribute';
 
 @naming('HeroFactory')
-@inject(Attribut)
+@inject(Attribute)
 @singleton()
 class Hero {
- constructor(attribut) {
-    this.attribut = attribut;
+ constructor(attribute) {
+    this.attribute = attribute;
   }
 }
 
 const me = $('HeroFactory'); // new instance
 const yo = $('HeroFactory'); // same instance
-````
+```
 
-Now, every time we need a Hero, we got the same instance.
+Now, every time we need a Hero, we get the same instance.
 
-Every time you use inject, you can use class in every part of your app.
+Every time you use `inject`, you can use the class in any part of your
+app.
 
 # Run test
 
@@ -192,4 +196,4 @@ npm run test:watch
 
 # Requirements
 
-NodeJS >= v6
+Node.js >= v6
